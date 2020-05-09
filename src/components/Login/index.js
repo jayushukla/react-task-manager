@@ -7,10 +7,9 @@ import { doLogin } from 'store/auth/auth.actions';
 import "./style.scss";
 
 function Login(props) {
-
   const [loginDetails, setLoginDetails] = useState({ apiKey: '', name: '' });
   const handleSubmit = () => {
-   props.doLogin(loginDetails)
+   props._doLogin(loginDetails)
   };
   const setState = (e, updateFor) => {
     const val = e.target.value;
@@ -53,9 +52,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (action) => {
   return {
-    _doLogin: (param) => dispatch(doLogin(param))
+    _doLogin: (param) => action(doLogin(param))
   }
 };
 
