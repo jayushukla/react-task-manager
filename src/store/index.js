@@ -1,13 +1,13 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { reducer as toastrReducer } from 'react-redux-toastr'
-import flights from './flights/flights.reducers';
+import auth from './auth/auth.reducers';
 
 import {isBrowser} from '../config';
 
 // create the master reducer
 const rootReducer = combineReducers({
-    flights,
+    auth,
     toastr: toastrReducer // <- Mounted at toastr.
 });
 

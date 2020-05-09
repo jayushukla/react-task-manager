@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 
 import "./style.scss";
 
-class Flights extends Component {
+class NotFound extends Component {
   render(){
   return (<div className="notfound-wrapper">
     <h3>Sorry, we couldn't seem to find that page :(</h3>
@@ -21,6 +21,6 @@ const mapDispatchToProps = (dispatch) => {
   return {}
 };
 
-const EnhancedComponent = compose(connect(mapStateToProps, mapDispatchToProps))(Flights);
+const EnhancedComponent = compose(connect(mapStateToProps, mapDispatchToProps))(NotFound);
 
 export default EnhancedComponent

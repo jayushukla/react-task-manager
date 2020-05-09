@@ -1,13 +1,13 @@
 const dev = {
-    API_URL: "http://pilot.computicket.com/webapi",
+    API_URL: "https://dev.teledirectasia.com:3092/",
 };
 
 const test = {
-    API_URL: "http://pilot.computicket.com/webapi",
+    API_URL: "https://dev.teledirectasia.com:3092/",
 };
 
 const prod = {
-    API_URL: "http://pilot.computicket.com/webapi",
+    API_URL: "https://dev.teledirectasia.com:3092/",
 };
 
 const config = process.env.REACT_APP_STAGE === 'prod'
@@ -22,12 +22,11 @@ export const isBrowser = typeof window === "object";
 export default {
     // Add common config values here
     MAX_ATTACHMENT_SIZE: 5000000,
-    APP_NAME: "computicket-travel",
+    APP_NAME: "task-manager",
     
-    FLIGHT_API: "/flight",
-    BUSSES_API: "/busses",
-    USER_API: "/user",
-    PUBLIC_API: "/public",
-
+    LOGIN: "login",
+    DASHBOARD: "dashboard",
+    TASKS: "tasks",
+    
     ...config
 };

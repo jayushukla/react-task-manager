@@ -2,24 +2,15 @@ import React, { useState } from "react";
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Grid } from 'semantic-ui-react';
+import { doLogin } from 'store/auth/auth.actions';
 
 import "./style.scss";
-import xhr from "../../store/xhr";
 
-export default function Login(props) {
+function Login(props) {
 
   const [loginDetails, setLoginDetails] = useState({ apiKey: '', name: '' });
   const handleSubmit = () => {
-    console.log(`Data ${JSON.stringify(loginDetails)}`);
-    const options = {
-      method: "POST",
-      body: JSON.stringify(loginDetails)
-    };
-
-    xhr('login', options).then((data) => {
-      console.log(data);
-    });
-
+   props.doLogin(loginDetails)
   };
   const setState = (e, updateFor) => {
     const val = e.target.value;
@@ -55,3 +46,19 @@ export default function Login(props) {
     </Grid>
   </div>)
 }
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    _doLogin: (param) => dispatch(doLogin(param))
+  }
+};
+
+const LoginComponent = compose(connect(mapStateToProps, mapDispatchToProps))(Login);
+
+export default LoginComponent
