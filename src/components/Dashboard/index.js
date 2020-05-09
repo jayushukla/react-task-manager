@@ -10,23 +10,23 @@ import TasksList from "../TasksList";
 export default function Dashboard() {
 	return (
 		<div className="dashboard-wrapper">
-			<Grid container verticalAlign="middle" justify="center">
-				<Grid.Row>
-					<Grid.Column width={5} stretched={true}>
+			<Grid container justify="center">
+				<Grid.Row className="grid-row">
+					<Grid.Column width={5} className="item">
 						<TasksCompleted />
 					</Grid.Column>
 
-					<Grid.Column width={5} stretched={true}>
+					<Grid.Column width={5} className="item">
 						<LatestTasks />
 					</Grid.Column>
 
-					<Grid.Column width={5} stretched={true}>
+					<Grid.Column width={5} className="item">
 						<TasksChart />
 					</Grid.Column>
 				</Grid.Row>
 
-				<Grid.Row>
-					<Grid.Column verticalAlign="top" width={15}>
+				<Grid.Row className="item">
+					<Grid.Column verticalAlign="top" width={15} stretched={true}>
 						<TasksList />
 					</Grid.Column>
 				</Grid.Row>

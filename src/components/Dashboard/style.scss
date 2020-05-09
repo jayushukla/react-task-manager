@@ -1,0 +1,16 @@
+.dashboard-wrapper {
+  .ui.grid > .row {
+    margin-top: 25px;
+
+    &.grid-row {
+      justify-content: space-between;
+    }
+  }
+
+  .item {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 12px;
+    padding: 22px;
+  }
+}
