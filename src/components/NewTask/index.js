@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import "./style.scss";
 
-class NoTask extends Component {
+class NewTask extends Component {
 
   handleClick() {
 
@@ -44,6 +44,6 @@ const mapDispatchToProps = (dispatch) => {
   return {}
 };
 
-const NoTaskComponent = compose(connect(mapStateToProps, mapDispatchToProps))(NoTask);
+const NewTaskComponent = compose(connect(mapStateToProps, mapDispatchToProps))(NewTask);
 
-export default NoTaskComponent
+export default NewTaskComponent

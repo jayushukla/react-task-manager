@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import "./style.scss";
 import { Grid } from 'semantic-ui-react'
+import NewTaskModal from '../../common/widgets/modal';
 
 export default class TasksList extends Component {
 
@@ -22,7 +23,7 @@ export default class TasksList extends Component {
               <span className="task-search ui form">
                 <input type="text" placeholder="Search by task name" />
 
-                <button type="button" onClick={this.handleClick} className="ui button">+ New Task</button>
+                <NewTaskModal />
               </span>
             </Grid.Column>
           </Grid.Row>
