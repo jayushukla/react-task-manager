@@ -3,17 +3,17 @@ import React, { Component } from 'react'
 import "./style.scss";
 import { Grid } from 'semantic-ui-react'
 
-export default class CTTContainer extends Component {
+export default class TasksChart extends Component {
   render() {
     return (
       <div>
         <Grid>
           <Grid.Row>
-            <Grid.Column width={2}></Grid.Column>
-            <Grid.Column width={12} {...this.props.attr}>
-              {this.props.children}
+            <Grid.Column>
+              <div className="task-status-wrapper">
+                <h4 className="task-completed">Chart needed</h4>
+              </div>
             </Grid.Column>
-            <Grid.Column width={2}></Grid.Column>
           </Grid.Row>
         </Grid>
       </div>

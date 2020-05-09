@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Grid } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
 
 import "./style.scss";
 
@@ -24,7 +25,9 @@ class NoTask extends Component {
             <div className="ui form new-task-container">
               <h4 className="task-label">+ New Task</h4>
               <input type="text" placeholder="Task Name" name="username" id="Id" />
-              <button type="button" onClick={this.handleClick} name="submit" className="ui button">+ New Task</button>
+              <Link to="/dashboard">
+                <button type="button" onClick={this.handleClick} name="submit" className="ui button">+ New Task</button>
+              </Link>
             </div>
           </Grid.Column>
         </Grid.Row>
