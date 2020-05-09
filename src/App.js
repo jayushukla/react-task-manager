@@ -1,39 +1,25 @@
-import React, { Component } from "react";
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { withRouter } from "react-router-dom";
-import Routes from "./routes";
+import React from "react";
 
 import './App.scss';
+import Login from "./components/Login";
+import NoTask from "./components/NoTask";
+import NewTask from "./components/NewTask";
+import Dashboard from "./components/Dashboard";
+import { useRoutes } from "hookrouter";
 
-class App extends Component {
-	render() {
-		const {
-			history
-		} = this.props;
-
-		const childProps = {
-			history
-		};
-
-		return (<>
-			<div className="app-container">
-				<Routes childProps={childProps} />
-			</div>
-		</>);
-	}
+const routes = {
+	'/': () => <Login />,
+	'/notask': () => <NoTask />,
+	'/newtask': () => <NewTask />,
+	'/dashboard': () => <Dashboard />
 }
+export default function App() {
 
-const mapStateToProps = (state) => {
-	return {
-	};
-};
+	const routeResult = useRoutes(routes);
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-	}
-};
-
-const EnhancedComponent = compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(App);
-
-export default EnhancedComponent
+	return (
+		<div className="app-container">
+			{routeResult}
+		</div>
+	);
+}

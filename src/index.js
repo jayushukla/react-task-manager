@@ -14,22 +14,22 @@ import ReduxToastr from 'react-redux-toastr'
 import store from './store';
 
 ReactDOM.render(<Provider store={store()}>
-    <Router>
-      <App />
-    </Router>
-    <ReduxToastr
-			timeOut={5000}
-			newestOnTop={false}
-			preventDuplicates
-			position="top-right"
-			getState={(state) => state.toastr}
-			transitionIn="fadeIn"
-			transitionOut="fadeOut"
-			progressBar
-			closeOnToastrClick
-		/>
-  </Provider>,
-  document.getElementById('root')
+	<Router>
+		<App />
+	</Router>
+	<ReduxToastr
+		timeOut={5000}
+		newestOnTop={false}
+		preventDuplicates
+		position="top-right"
+		getState={(state) => state.toastr}
+		transitionIn="fadeIn"
+		transitionOut="fadeOut"
+		progressBar
+		closeOnToastrClick
+	/>
+</Provider>,
+	document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
