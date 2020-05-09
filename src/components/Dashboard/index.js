@@ -26,7 +26,7 @@ export default function Dashboard() {
 				</Grid.Row>
 
 				<Grid.Row className="item">
-					<Grid.Column verticalAlign="top" width={15} stretched={true}>
+					<Grid.Column verticalAlign="top" stretched={true}>
 						<TasksList />
 					</Grid.Column>
 				</Grid.Row>
