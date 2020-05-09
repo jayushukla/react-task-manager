@@ -4,8 +4,6 @@ import { compose } from 'recompose';
 import { withRouter } from "react-router-dom";
 import Routes from "./routes";
 
-import Header from './common/Header'
-
 import './App.scss';
 
 class App extends Component {
@@ -16,14 +14,13 @@ class App extends Component {
 
 		const childProps = {
 			history
-    };
-    
+		};
+
 		return (<>
-				<Header />
-				<div className="app-container">
-					<Routes childProps={childProps} />
-				</div>
-			</>);
+			<div className="app-container">
+				<Routes childProps={childProps} />
+			</div>
+		</>);
 	}
 }
 
