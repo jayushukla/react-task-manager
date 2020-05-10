@@ -8,10 +8,7 @@ export const NAVIGATE_TO = 'NAVIGATE';
 
 const initialState = {
   isLoading: false,
-  tasks: [{
-    name: 'First task',
-    isCompleted: false,
-  }]
+  tasks: []
 }
 
 export default function (state = initialState, { type, payload }) {
@@ -37,13 +34,10 @@ export default function (state = initialState, { type, payload }) {
     case UPDATE_TASK:
       return {
         ...state,
-        loading: false,
-        hasError: true,
-        errorMessage: payload,
+        tasks: payload,
       };
 
     case SET_TASKS:
-      console.log('tasssks', payload);
       return {
         ...state,
         tasks: payload

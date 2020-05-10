@@ -30,4 +30,20 @@ export const doAddTaskCall = (data) => {
     )
 };
 
+export const doUpdateTasksCall = (param) => {
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify(param)
+    }
+
+    return xhr(`${CONFIG.API_URL}${CONFIG.TASKS}/${param._id}`, options).then((response) =>
+        Promise.resolve(response)
+    ).catch(e =>
+        Promise.reject(
+            e || { msg: 'Invalid Request' }
+        )
+    )
+};
+
+
 

@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import "./style.scss";
 import { Grid } from 'semantic-ui-react'
 import NewTaskModal from '../../common/widgets/modal';
-import { getAllTasks } from '../../store/task/task.actions';
+import { getAllTasks, updateTask } from '../../store/task/task.actions';
 export class TasksList extends Component
 {
 
@@ -14,6 +14,7 @@ export class TasksList extends Component
     this.handleClick = this.handleClick.bind(this);
     this.onChange = this.onChange.bind(this);
     this.tasks = this.onChange.bind(this);
+    this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
     this.state = {
       searchText: ''
     }
@@ -35,20 +36,12 @@ export class TasksList extends Component
     }
   }
 
-  tasks()
-  {
-    console.log('tasks');
-    if (this.props.tasksList && this.props.tasksList.tasks) {
-      return this.props.tasksList.tasks.filter(task => task.name.toLowercase().indexOf(this.state.searchText)).map((task, index) =>
-      {
-        return (<li key={index}>
-          <input type="checkbox" className="hidden" />
-          <label className={task.isCompleted ? 'completed' : ''}>{task.name}</label>
-          <span className="actions">
-            <i className="pencil alternate icon"></i> <i className="trash icon"></i>
-          </span>
-        </li>);
-      })
+  onChangeCheckbox(task) {
+    if (task && task._id) {
+      // make api call for completed or not completed
+      const taskLocal = Object.assign({}, task);
+      taskLocal.completed = !taskLocal.completed;
+      this.props._updateTask(taskLocal);
     }
   }
 
@@ -79,8 +72,8 @@ export class TasksList extends Component
                     this.props.tasksList && this.props.tasksList.tasks && this.props.tasksList.tasks.filter(task => task.name.toLowerCase().indexOf(this.state.searchText) !== -1).map((task, index) =>
                       {
                         return (<li key={index}>
-                          <input type="checkbox" className="hidden" />
-                          <label className={task.isCompleted ? 'completed' : ''}>{task.name}</label>
+                          <input id={`id${index}`} type="checkbox" className="hidden" onChange={this.onChangeCheckbox.bind(this, task)} />
+                          <label htmlFor={`id${index}`} className={task.completed ? 'completed' : ''}>{task.name}</label>
                           <span className="actions">
                             <i className="pencil alternate icon"></i> <i className="trash icon"></i>
                           </span>
@@ -106,7 +99,8 @@ const mapStateToProps = (state) =>
 const mapDispatchToProps = (action) =>
 {
   return {
-    _getAllTasks: (param) => action(getAllTasks(param))
+    _getAllTasks: (param) => action(getAllTasks(param)),
+    _updateTask: (param) => action(updateTask(param))
   }
 };
 
