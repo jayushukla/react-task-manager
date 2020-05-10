@@ -5,14 +5,15 @@ import Login from "./components/Login";
 import NoTask from "./components/NoTask";
 import NewTask from "./components/NewTask";
 import Dashboard from "./components/Dashboard";
-import { useRoutes } from "hookrouter";
+import { useRoutes, useInterceptor } from "hookrouter";
 
 const routes = {
 	'/': () => <Login />,
 	'/notask': () => <NoTask />,
 	'/newtask': () => <NewTask />,
 	'/dashboard': () => <Dashboard />
-}
+};
+
 export default function App() {
 
 	const routeResult = useRoutes(routes);

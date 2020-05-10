@@ -6,8 +6,10 @@ import LatestTasks from "../../common/widgets/LatestTasks";
 import "./style.scss";
 import TasksChart from "../../common/widgets/TasksChart";
 import TasksList from "../TasksList";
+import RouteGuard from "../../common/guard";
 
 export default function Dashboard() {
+  RouteGuard();
   return (<div className="dashboard-wrapper">
     <Grid container
       verticalAlign="middle"

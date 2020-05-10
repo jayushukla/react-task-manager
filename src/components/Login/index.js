@@ -2,21 +2,33 @@ import React, { useState } from "react";
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Grid } from 'semantic-ui-react';
-import { doLogin } from 'store/auth/auth.actions';
+import { doLogin, doNavigate, _setUserSession } from '../../store/auth/auth.actions';
 
 import "./style.scss";
+import { usePath } from "hookrouter";
 
 function Login(props) {
+  console.log('Login Props', props);
+  const userData = localStorage && localStorage.getItem('userData');
+
+  if (userData && props.auth.url === '/') {
+    console.log("calling do navitae");
+    props._setUserSession(JSON.parse(userData));
+    props._doNavigate('/dashboard');
+  }
   const [loginDetails, setLoginDetails] = useState({ apiKey: '', name: '' });
+
   const handleSubmit = () => {
-   props._doLogin(loginDetails)
+    props._doLogin(loginDetails);
   };
-  const setState = (e, updateFor) => {
+
+  const handleChange = (e, updateFor) => {
     const val = e.target.value;
     setLoginDetails(prevState => {
       return { ...prevState, [updateFor]: val };
     });
   };
+
   return (<div className="home-wrapper">
     <Grid container
       spacing={0}
@@ -30,12 +42,12 @@ function Login(props) {
             <h4 className="header">Login</h4>
             <div className="field">
               <div className="ui icon input">
-                <input type="text" onChange={(e) => setState(e, 'name')} placeholder="Name" name="username" id="Id" />
+                <input type="text" onChange={(e) => handleChange(e, 'name')} placeholder="Name" name="username" id="Id" />
               </div>
             </div>
             <div className="field">
               <div className="ui icon input">
-                <input type="password" onChange={(e) => setState(e, 'apiKey')} placeholder="Password" name="password" id="password" />
+                <input type="password" onChange={(e) => handleChange(e, 'apiKey')} placeholder="Password" name="password" id="password" />
               </div>
             </div>
             <button type="button" onClick={() => handleSubmit()} name="submit" className="ui button">Login</button>
@@ -54,7 +66,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (action) => {
   return {
-    _doLogin: (param) => action(doLogin(param))
+    _doLogin: (param) => action(doLogin(param)),
+    _doNavigate: (param) => action(doNavigate(param)),
+    _setUserSession: (param) => action(_setUserSession(param))
   }
 };
 
