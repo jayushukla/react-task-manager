@@ -1,13 +1,12 @@
 import CONFIG from '../../config';
 import xhr from '../xhr';
 
-export const doLoginCall = (param) => {
+export const doGetTasksCall = (param) => {
     const options = {
-        method: 'POST',
-        body: JSON.stringify(param)
+        method: 'GET'
     }
 
-    return xhr(`${CONFIG.API_URL}${CONFIG.LOGIN}`, options).then((response) => 
+    return xhr(`${CONFIG.API_URL}${CONFIG.TASKS}`, options).then((response) => 
         Promise.resolve(response)
     ).catch(e => 
         Promise.reject(

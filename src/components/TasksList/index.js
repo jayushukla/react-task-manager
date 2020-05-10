@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import "./style.scss";
 import { Grid } from 'semantic-ui-react'
 import NewTaskModal from '../../common/widgets/modal';
+import { getAllTasks } from '../../store/task/task.actions';
+export class TasksList extends Component {
 
-export default class TasksList extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+    props._getAllTasks();
+  }
 
   handleClick() {
 
@@ -62,4 +69,18 @@ export default class TasksList extends Component {
     )
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
 
+const mapDispatchToProps = (action) => {
+  return {
+    _getAllTasks: (param) => action(getAllTasks(param))
+  }
+};
+
+const TasksListComponent = compose(connect(mapStateToProps, mapDispatchToProps))(TasksList);
+
+export default TasksListComponent;
