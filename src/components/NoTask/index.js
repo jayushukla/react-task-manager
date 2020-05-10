@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { Grid } from 'semantic-ui-react'
 
 import "./style.scss";
+import RouteGuard from "../../common/guard";
 
 export default function NoTask() {
+  RouteGuard();
   return (<div className="home-wrapper">
     <Grid container
       spacing={0}

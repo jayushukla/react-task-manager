@@ -6,6 +6,7 @@ import NoTask from "./components/NoTask";
 import NewTask from "./components/NewTask";
 import Dashboard from "./components/Dashboard";
 import { useRoutes, useInterceptor } from "hookrouter";
+import NotFound from "./components/NotFound";
 
 const routes = {
 	'/': () => <Login />,
@@ -20,7 +21,7 @@ export default function App() {
 
 	return (
 		<div className="app-container">
-			{routeResult}
+			{routeResult || <NotFound />}
 		</div>
 	);
 }

@@ -1,26 +1,7 @@
-import React, { Component }  from "react";
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import React from "react";
 
-import "./style.scss";
-
-class NotFound extends Component {
-  render(){
+export default function NotFound() {
   return (<div className="notfound-wrapper">
     <h3>Sorry, we couldn't seem to find that page :(</h3>
-    <div>[NEED SOMETHING MORE CREATIVE]</div>
-    </div>)
-  }
+  </div>)
 }
-
-const mapStateToProps = () => {
-  return {};
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {}
-};
-
-const EnhancedComponent = compose(connect(mapStateToProps, mapDispatchToProps))(NotFound);
-
-export default EnhancedComponent
