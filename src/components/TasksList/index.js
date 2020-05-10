@@ -12,12 +12,44 @@ export class TasksList extends Component
   {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.tasks = this.onChange.bind(this);
+    this.state = {
+      searchText: ''
+    }
     console.log(props);
   }
 
   handleClick()
   {
 
+  }
+
+  onChange(e)
+  {
+    if (e && e.target) {
+      const search = e.target.value;
+      this.setState({
+        searchText: search
+      });
+    }
+  }
+
+  tasks()
+  {
+    console.log('tasks');
+    if (this.props.tasksList && this.props.tasksList.tasks) {
+      return this.props.tasksList.tasks.filter(task => task.name.toLowercase().indexOf(this.state.searchText)).map((task, index) =>
+      {
+        return (<li key={index}>
+          <input type="checkbox" className="hidden" />
+          <label className={task.isCompleted ? 'completed' : ''}>{task.name}</label>
+          <span className="actions">
+            <i className="pencil alternate icon"></i> <i className="trash icon"></i>
+          </span>
+        </li>);
+      })
+    }
   }
 
   render()
@@ -32,7 +64,7 @@ export class TasksList extends Component
 
             <Grid.Column width={8} verticalAlign="middle" textAlign="right">
               <span className="task-search ui form">
-                <input type="text" placeholder="Search by task name" />
+                <input type="text" placeholder="Search by task name" onChange={this.onChange.bind(this)} />
 
                 <NewTaskModal />
               </span>
@@ -44,16 +76,16 @@ export class TasksList extends Component
               <div className="container">
                 <ul className="tasks ui checkbox">
                   {
-                    this.props.tasksList && this.props.tasksList.tasks && this.props.tasksList.tasks.map((task, index) =>
-                    {
-                      return <li key={index}>
-                        <input type="checkbox" className="hidden" />
-                        <label className={task.isCompleted ? 'completed' : ''}>{task.name}</label>
-                        <span className="actions">
-                          <i className="pencil alternate icon"></i> <i className="trash icon"></i>
-                        </span>
-                      </li>
-                    })
+                    this.props.tasksList && this.props.tasksList.tasks && this.props.tasksList.tasks.filter(task => task.name.toLowerCase().indexOf(this.state.searchText) !== -1).map((task, index) =>
+                      {
+                        return (<li key={index}>
+                          <input type="checkbox" className="hidden" />
+                          <label className={task.isCompleted ? 'completed' : ''}>{task.name}</label>
+                          <span className="actions">
+                            <i className="pencil alternate icon"></i> <i className="trash icon"></i>
+                          </span>
+                        </li>);
+                      })
                   }
                 </ul>
               </div>
