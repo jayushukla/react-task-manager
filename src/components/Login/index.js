@@ -1,25 +1,18 @@
 import React, { useState } from "react";
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { compose } from 'recompose';
 import { Grid } from 'semantic-ui-react';
 import { doLogin, doNavigate, _setUserSession } from '../../store/auth/auth.actions';
 
 import "./style.scss";
-import { usePath } from "hookrouter";
 
 function Login(props) {
-  console.log('Login Props', props);
+  const dispatch = useDispatch();
+  const [loginDetails, setLoginDetails] = useState({ apiKey: '', name: '' });
   const userData = localStorage && localStorage.getItem('userData');
 
-  if (userData && props.auth.url === '/') {
-    console.log("calling do navitae");
-    props._setUserSession(JSON.parse(userData));
-    props._doNavigate('/dashboard');
-  }
-  const [loginDetails, setLoginDetails] = useState({ apiKey: '', name: '' });
-
   const handleSubmit = () => {
-    props._doLogin(loginDetails);
+    dispatch(doLogin(loginDetails));
   };
 
   const handleChange = (e, updateFor) => {
@@ -28,6 +21,11 @@ function Login(props) {
       return { ...prevState, [updateFor]: val };
     });
   };
+
+  if (userData && props.auth.url === '/') {
+    console.log("calling do navitae");
+    dispatch(doNavigate('/dashboard'));
+  }
 
   return (<div className="home-wrapper">
     <Grid container
@@ -64,14 +62,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (action) => {
-  return {
-    _doLogin: (param) => action(doLogin(param)),
-    _doNavigate: (param) => action(doNavigate(param)),
-    _setUserSession: (param) => action(_setUserSession(param))
-  }
-};
-
-const LoginComponent = compose(connect(mapStateToProps, mapDispatchToProps))(Login);
+const LoginComponent = compose(connect(mapStateToProps))(Login);
 
 export default LoginComponent

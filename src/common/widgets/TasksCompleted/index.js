@@ -6,11 +6,11 @@ import { Grid } from 'semantic-ui-react'
 export default class TasksCompleted extends Component {
   render() {
     return (
-      <div>
+      <div className="task-completed-wrapper">
         <Grid>
           <Grid.Row>
             <Grid.Column>
-              <div className="task-status-wrapper">
+              <div>
                 <h4 className="task-completed">Tasks Completed</h4>
                 <div>
                   <span className="num-completed">

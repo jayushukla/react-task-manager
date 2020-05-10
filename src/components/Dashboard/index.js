@@ -11,10 +11,28 @@ import RouteGuard from "../../common/guard";
 export default function Dashboard() {
   RouteGuard();
   return (<div className="dashboard-wrapper">
+    <Grid>
+      <Grid.Row>
+        <Grid.Column className="header">
+          <Grid container>
+            <Grid.Row>
+              <Grid.Column width={8}>
+                <div className="user"></div>
+                <span className="name">Ali</span>
+              </Grid.Column>
+
+              <Grid.Column width={7} textAlign="right" className="logout">
+                <span className="logout">Logout</span>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
     <Grid container
       verticalAlign="middle"
       justify="center"
-      style={{ minHeight: "100vh" }}>
+      style={{ minHeight: "500px" }}>
       <Grid.Row>
         <Grid.Column width={5} stretched={true}>
           <TasksCompleted />
