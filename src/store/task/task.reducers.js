@@ -4,9 +4,10 @@ export const DELETE_TASK = 'DELETE_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';
 
 const initialState = {
+  isLoading: false,
   tasks: [{
     name: 'First task',
-    isCompleted: false
+    isCompleted: false,
   }]
 }
 

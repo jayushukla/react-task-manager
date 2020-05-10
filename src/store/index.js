@@ -2,12 +2,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { reducer as toastrReducer } from 'react-redux-toastr'
 import auth from './auth/auth.reducers';
+import tasks from './task/task.reducers';
 
-import {isBrowser} from '../config';
+import { isBrowser } from '../config';
 
 // create the master reducer
 const rootReducer = combineReducers({
     auth,
+    tasks,
     toastr: toastrReducer // <- Mounted at toastr.
 });
 
@@ -23,4 +25,4 @@ const reduxMiddleware = compose(
 
 
 // export a store creator factory with initial state if present...
-export default () => createStore( rootReducer, initialState, reduxMiddleware );
+export default () => createStore(rootReducer, initialState, reduxMiddleware);
