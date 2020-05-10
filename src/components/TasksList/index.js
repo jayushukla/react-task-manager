@@ -5,19 +5,23 @@ import "./style.scss";
 import { Grid } from 'semantic-ui-react'
 import NewTaskModal from '../../common/widgets/modal';
 import { getAllTasks } from '../../store/task/task.actions';
-export class TasksList extends Component {
+export class TasksList extends Component
+{
 
-  constructor(props) {
+  constructor(props)
+  {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    //props._getAllTasks();
+    console.log(props);
   }
 
-  handleClick() {
+  handleClick()
+  {
 
   }
 
-  render() {
+  render()
+  {
     return (
       <div className="task-lists">
         <Grid>
@@ -39,27 +43,18 @@ export class TasksList extends Component {
             <Grid.Column verticalAlign="top">
               <div className="container">
                 <ul className="tasks ui checkbox">
-                  <li>
-                    <input type="checkbox" className="hidden" />
-                    <label>Clean the room</label>
-                    <span className="actions">
-                      <i className="pencil alternate icon"></i> <i className="trash icon"></i>
-                    </span>
-                  </li>
-                  <li>
-                    <input type="checkbox" className="hidden" />
-                    <label>Buy Some vegatables</label>
-                    <span className="actions">
-                      <i className="pencil alternate icon"></i> <i className="trash icon"></i>
-                    </span>
-                  </li>
-                  <li>
-                    <input type="checkbox" className="hidden" />
-                    <label className="completed">Complete React App</label>
-                    <span className="actions">
-                      <i className="pencil alternate icon"></i> <i className="trash icon"></i>
-                    </span>
-                  </li>
+                  {
+                    this.props.tasksList && this.props.tasksList.tasks && this.props.tasksList.tasks.map((task, index) =>
+                    {
+                      return <li key={index}>
+                        <input type="checkbox" className="hidden" />
+                        <label className={task.isCompleted ? 'completed' : ''}>{task.name}</label>
+                        <span className="actions">
+                          <i className="pencil alternate icon"></i> <i className="trash icon"></i>
+                        </span>
+                      </li>
+                    })
+                  }
                 </ul>
               </div>
             </Grid.Column>
@@ -69,13 +64,15 @@ export class TasksList extends Component {
     )
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) =>
+{
   return {
-    auth: state.auth
+    tasksList: state.tasks
   };
 };
 
-const mapDispatchToProps = (action) => {
+const mapDispatchToProps = (action) =>
+{
   return {
     _getAllTasks: (param) => action(getAllTasks(param))
   }
