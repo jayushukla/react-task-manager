@@ -47,13 +47,17 @@ export const addTask = (param) => (dispatch) => {
 
 export const getAllTasks = (param) => (dispatch) => {
   dispatch(_isLoadingInProgress(true));
-  doGetTasksCall(param).then((response) => {
+  return doGetTasksCall(param).then((response) => {
     console.log(response);
     dispatch(_setTasks(response.tasks));
     dispatch(_isLoadingInProgress(false));
     toastr.success(response.msg);
+    return Promise.resolve(response)
   }).catch((e) => {
     dispatch(_isLoadingInProgress(false));
     toastr.error('Something went wrong');
+    return Promise.reject(
+      e || { msg: 'Invalid Request' }
+    )
   });
 };

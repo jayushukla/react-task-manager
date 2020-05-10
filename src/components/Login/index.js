@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useStore } from 'react-redux';
 import { compose } from 'recompose';
 import { Grid } from 'semantic-ui-react';
 import { doLogin, doNavigate, _setUserSession } from '../../store/auth/auth.actions';
@@ -9,6 +9,8 @@ import { getAllTasks } from "../../store/task/task.actions";
 
 function Login(props) {
   const dispatch = useDispatch();
+  const store = useStore();
+
   const [loginDetails, setLoginDetails] = useState({ apiKey: '', name: '' });
   const userData = localStorage && localStorage.getItem('userData');
 
@@ -25,15 +27,17 @@ function Login(props) {
   };
 
   if (userData && props.auth.url === '/') {
-    dispatch(getAllTasks());
-    console.log("calling do navitae");
-    if (!props.tasks.isLoading) {
-      if (props.tasks.tasks.length > 0) {
-        dispatch(doNavigate('/dashboard'));
-      } else {
-        dispatch(doNavigate('/notask'));
+    dispatch(getAllTasks()).then(() => {
+      const tasks = store.getState().tasks;
+
+      if (!tasks.isLoading) {
+        if (tasks.tasks.length > 0) {
+          dispatch(doNavigate('/dashboard'));
+        } else {
+          dispatch(doNavigate('/notask'));
+        }
       }
-    }
+    });
   }
 
   return (<div className="home-wrapper">
@@ -67,8 +71,7 @@ function Login(props) {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth,
-    tasks: state.tasks
+    auth: state.auth
   };
 };
 
