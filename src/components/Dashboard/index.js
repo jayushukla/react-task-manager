@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { Grid } from 'semantic-ui-react';
+import { compose } from 'recompose';
 import TasksCompleted from "../../common/widgets/TasksCompleted";
 import LatestTasks from "../../common/widgets/LatestTasks";
 
@@ -7,9 +8,17 @@ import "./style.scss";
 import TasksChart from "../../common/widgets/TasksChart";
 import TasksList from "../TasksList";
 import RouteGuard from "../../common/guard";
+import { connect, useDispatch } from "react-redux";
+import { doLogout } from "../../store/auth/auth.actions";
 
-export default function Dashboard() {
+function Dashboard() {
   RouteGuard();
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(doLogout());
+  };
+
   return (<div className="dashboard-wrapper">
     <Grid>
       <Grid.Row>
@@ -22,7 +31,7 @@ export default function Dashboard() {
               </Grid.Column>
 
               <Grid.Column width={7} textAlign="right" className="logout">
-                <span className="logout">Logout</span>
+                <span className="logout" onClick={logout}>Logout</span>
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -55,3 +64,14 @@ export default function Dashboard() {
     </Grid>
   </div >)
 }
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+    tasks: state.tasks
+  };
+};
+
+const DashboardComponent = compose(connect(mapStateToProps))(Dashboard);
+
+export default DashboardComponent

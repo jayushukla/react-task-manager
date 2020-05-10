@@ -5,6 +5,7 @@ import { Grid } from 'semantic-ui-react';
 import { doLogin, doNavigate, _setUserSession } from '../../store/auth/auth.actions';
 
 import "./style.scss";
+import { getAllTasks } from "../../store/task/task.actions";
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ function Login(props) {
 
   const handleSubmit = () => {
     dispatch(doLogin(loginDetails));
+    //dispatch(getAllTasks());
   };
 
   const handleChange = (e, updateFor) => {
@@ -23,8 +25,15 @@ function Login(props) {
   };
 
   if (userData && props.auth.url === '/') {
+    dispatch(getAllTasks());
     console.log("calling do navitae");
-    dispatch(doNavigate('/dashboard'));
+    if (!props.tasks.isLoading) {
+      if (props.tasks.tasks.length > 0) {
+        dispatch(doNavigate('/dashboard'));
+      } else {
+        dispatch(doNavigate('/notask'));
+      }
+    }
   }
 
   return (<div className="home-wrapper">
@@ -58,7 +67,8 @@ function Login(props) {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    tasks: state.tasks
   };
 };
 

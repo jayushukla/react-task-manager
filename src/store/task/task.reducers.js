@@ -2,7 +2,7 @@ export const ADD_TASK = 'ADD_TASK';
 export const MARK_AS_COMPLETED = 'MARK_AS_COMPLETED';
 export const DELETE_TASK = 'DELETE_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';
-export const GET_TASKS = 'GET_TASKS';
+export const SET_TASKS = 'SET_TASKS';
 export const IS_LOADING = 'IS_LOADING';
 export const NAVIGATE_TO = 'NAVIGATE';
 
@@ -19,7 +19,7 @@ export default function (state = initialState, { type, payload }) {
     case ADD_TASK:
       return {
         ...state,
-        user: initialState.user
+        tasks: [...state.tasks, payload]
       };
 
     case MARK_AS_COMPLETED:
@@ -42,12 +42,13 @@ export default function (state = initialState, { type, payload }) {
         errorMessage: payload,
       };
 
-    case GET_TASKS: 
+    case SET_TASKS:
+      console.log('tasssks', payload);
       return {
         ...state,
         tasks: payload
       }
-     
+
     case IS_LOADING: {
       return {
         ...state,
@@ -59,7 +60,7 @@ export default function (state = initialState, { type, payload }) {
         ...state,
         url: payload
       }
-    }  
+    }
     default:
       return state;
   }

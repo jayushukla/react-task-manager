@@ -6,12 +6,28 @@ export const doGetTasksCall = (param) => {
         method: 'GET'
     }
 
-    return xhr(`${CONFIG.API_URL}${CONFIG.TASKS}`, options).then((response) => 
+    return xhr(`${CONFIG.API_URL}${CONFIG.TASKS}`, options).then((response) =>
         Promise.resolve(response)
-    ).catch(e => 
+    ).catch(e =>
         Promise.reject(
-            e || { msg: 'Invalid Request'}
+            e || { msg: 'Invalid Request' }
         )
     )
 };
+
+export const doAddTaskCall = (data) => {
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(data)
+    }
+
+    return xhr(`${CONFIG.API_URL}${CONFIG.TASKS}`, options).then((response) =>
+        Promise.resolve(response)
+    ).catch(e =>
+        Promise.reject(
+            e || { msg: 'Invalid Request' }
+        )
+    )
+};
+
 

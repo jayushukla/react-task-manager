@@ -1,7 +1,8 @@
 import {
     SET_USER_SESSION,
     IS_LOGIN_INPROGRESS,
-    NAVIGATE_TO
+    NAVIGATE_TO,
+    CLEAR_USER_SESSION
 } from './auth.reducers';
 import { doLoginCall } from './auth.services';
 import { toastr } from 'react-redux-toastr'
@@ -31,18 +32,27 @@ export const _doNavigate = (url = '/') => {
     }
 };
 
-export const doNavigate = (param) => (dispatch) => {
-    dispatch(_doNavigate(param));
+export const _doLogout = () => ({
+    type: CLEAR_USER_SESSION,
+    payload: null
+});
+
+export const doNavigate = (param) => (action) => {
+    action(_doNavigate(param));
 };
 
 /* Async Action Creators */
-export const doLogin = (param) => (dispatch) => {
-    dispatch(_isLoginInprogress(true))
+export const doLogin = (param) => (action) => {
+    action(_isLoginInprogress(true))
     doLoginCall(param).then((authRes) => {
-        dispatch(_isLoginInprogress(false))
-        dispatch(_setUserSession(authRes))
+        action(_isLoginInprogress(false))
+        action(_setUserSession(authRes))
     }).catch((e) => {
         toastr.error('Auth Error', e && e._error && e._error.msg || 'Invalid Request')
-        dispatch(_isLoginInprogress(false))
+        action(_isLoginInprogress(false))
     })
 };
+
+export const doLogout = () => (action) => {
+    action(_doLogout());
+}
