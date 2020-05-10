@@ -10,7 +10,7 @@ export default class TasksChart extends Component {
         <Grid>
           <Grid.Row>
             <Grid.Column>
-              <div className="task-status-wrapper">
+              <div className="task-chart-wrapper">
                 <h4 className="task-completed">Chart needed</h4>
               </div>
             </Grid.Column>

@@ -9,7 +9,7 @@ import TasksChart from "../../common/widgets/TasksChart";
 import TasksList from "../TasksList";
 import RouteGuard from "../../common/guard";
 import { connect, useDispatch } from "react-redux";
-import { doLogout } from "../../store/auth/auth.actions";
+import { doLogout, doNavigate } from "../../store/auth/auth.actions";
 
 function Dashboard() {
   RouteGuard();
@@ -17,6 +17,7 @@ function Dashboard() {
 
   const logout = () => {
     dispatch(doLogout());
+    dispatch(doNavigate('/'));
   };
 
   return (<div className="dashboard-wrapper">
@@ -38,20 +39,20 @@ function Dashboard() {
         </Grid.Column>
       </Grid.Row>
     </Grid>
-    <Grid container
+    <Grid doubling={true} container
       verticalAlign="middle"
       justify="center"
       style={{ minHeight: "500px" }}>
       <Grid.Row>
-        <Grid.Column width={5} stretched={true}>
+        <Grid.Column widescreen={5} stretched={true} mobile={16}>
           <TasksCompleted />
         </Grid.Column>
 
-        <Grid.Column width={5} stretched={true}>
+        <Grid.Column widescreen={5} stretched={true} mobile={16}>
           <LatestTasks />
         </Grid.Column>
 
-        <Grid.Column width={5} stretched={true}>
+        <Grid.Column widescreen={5} stretched={true} mobile={16}>
           <TasksChart />
         </Grid.Column>
       </Grid.Row>

@@ -48,7 +48,7 @@ function Login(props) {
       justify="center"
       style={{ minHeight: "100vh" }}>
       <Grid.Row>
-        <Grid.Column width={5}>
+        <Grid.Column width={5} mobile={16}>
           <div className="ui form login-container">
             <h4 className="header">Login</h4>
             <div className="field">

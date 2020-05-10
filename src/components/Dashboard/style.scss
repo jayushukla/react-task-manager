@@ -35,4 +35,16 @@
     color: #6D8187;
     @include header-content-text;
   }
+
+  .doubling {
+    margin:0 !important;
+  }
+
+  .mobile {
+    padding: 0 !important;
+
+    .task-completed-wrapper, .task-list-wrapper, .task-chart-wrapper  {
+      border-radius: 0;
+    }
+  }
 }

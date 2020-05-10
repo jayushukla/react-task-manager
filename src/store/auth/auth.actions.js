@@ -32,10 +32,13 @@ export const _doNavigate = (url = '/') => {
     }
 };
 
-export const _doLogout = () => ({
-    type: CLEAR_USER_SESSION,
-    payload: null
-});
+export const _doLogout = () => {
+    localStorage.removeItem('userData');
+    return {
+        type: CLEAR_USER_SESSION,
+        payload: null
+    }
+};
 
 export const doNavigate = (param) => (action) => {
     action(_doNavigate(param));
@@ -54,5 +57,5 @@ export const doLogin = (param) => (action) => {
 };
 
 export const doLogout = () => (action) => {
-    action(_doLogout());
+    return action(_doLogout());
 }
