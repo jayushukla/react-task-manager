@@ -5,29 +5,25 @@ import "./style.scss";
 import { Grid } from 'semantic-ui-react'
 import NewTaskModal from '../../common/widgets/modal';
 import { getAllTasks, updateTask } from '../../store/task/task.actions';
-export class TasksList extends Component
-{
 
-  constructor(props)
-  {
+export class TasksList extends Component {
+
+  constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.onChange = this.onChange.bind(this);
     this.tasks = this.onChange.bind(this);
-    this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
     this.state = {
       searchText: ''
     }
     console.log(props);
   }
 
-  handleClick()
-  {
+  handleClick() {
 
   }
 
-  onChange(e)
-  {
+  onChange(e) {
     if (e && e.target) {
       const search = e.target.value;
       this.setState({
@@ -45,8 +41,7 @@ export class TasksList extends Component
     }
   }
 
-  render()
-  {
+  render() {
     return (
       <div className="task-lists">
         <Grid>
@@ -69,16 +64,15 @@ export class TasksList extends Component
               <div className="container">
                 <ul className="tasks ui checkbox">
                   {
-                    this.props.tasksList && this.props.tasksList.tasks && this.props.tasksList.tasks.filter(task => task.name.toLowerCase().indexOf(this.state.searchText) !== -1).map((task, index) =>
-                      {
-                        return (<li key={index}>
-                          <input id={`id${index}`} type="checkbox" className="hidden" onChange={this.onChangeCheckbox.bind(this, task)} />
-                          <label htmlFor={`id${index}`} className={task.completed ? 'completed' : ''}>{task.name}</label>
-                          <span className="actions">
-                            <i className="pencil alternate icon"></i> <i className="trash icon"></i>
-                          </span>
-                        </li>);
-                      })
+                    this.props.tasksList && this.props.tasksList.tasks && this.props.tasksList.tasks.filter(task => task.name.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !== -1).map((task, index) => {
+                      return (<li key={index}>
+                        <input id={`id${index}`} type="checkbox" defaultChecked={task.completed} className="hidden" onChange={() => this.onChangeCheckbox(task)} />
+                        <label htmlFor={`id${index}`} className={task.completed ? 'completed' : ''}>{task.name}</label>
+                        <span className="actions">
+                          <i className="pencil alternate icon"></i> <i className="trash icon"></i>
+                        </span>
+                      </li>);
+                    })
                   }
                 </ul>
               </div>
@@ -89,15 +83,13 @@ export class TasksList extends Component
     )
   }
 }
-const mapStateToProps = (state) =>
-{
+const mapStateToProps = (state) => {
   return {
     tasksList: state.tasks
   };
 };
 
-const mapDispatchToProps = (action) =>
-{
+const mapDispatchToProps = (action) => {
   return {
     _getAllTasks: (param) => action(getAllTasks(param)),
     _updateTask: (param) => action(updateTask(param))

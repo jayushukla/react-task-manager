@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect, useDispatch, useStore } from 'react-redux';
 import { compose } from 'recompose';
 import { Grid } from 'semantic-ui-react';
-import { doLogin, doNavigate, _setUserSession } from '../../store/auth/auth.actions';
+import { doLogin, doNavigate } from '../../store/auth/auth.actions';
 
 import "./style.scss";
 import { getAllTasks } from "../../store/task/task.actions";
@@ -16,7 +16,6 @@ function Login(props) {
 
   const handleSubmit = () => {
     dispatch(doLogin(loginDetails));
-    //dispatch(getAllTasks());
   };
 
   const handleChange = (e, updateFor) => {
@@ -48,7 +47,7 @@ function Login(props) {
       justify="center"
       style={{ minHeight: "100vh" }}>
       <Grid.Row>
-        <Grid.Column widescreen={5} mobile={16}>
+        <Grid.Column largeScreen={5} mobile={16}>
           <div className="ui form login-container">
             <h4 className="header">Login</h4>
             <div className="field">

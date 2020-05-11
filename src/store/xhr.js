@@ -4,12 +4,12 @@ const JSONHeaders = {
   'Content-Type': 'application/json',
   'Authorization': ''
 };
-const userData = localStorage.getItem('userData') && JSON.parse(localStorage.getItem('userData'));
-const token = userData && userData.token.token;
-
-JSONHeaders.Authorization = token;
 
 export const xhr = (url, options) => {
+  const userData = localStorage.getItem('userData') && JSON.parse(localStorage.getItem('userData'));
+  const token = userData && userData.token.token;
+
+  JSONHeaders.Authorization = token;
   let headers = Object.assign({}, JSONHeaders)
   return fetch(url, Object.assign({ headers }, options))
     .then((response) => {

@@ -32,9 +32,10 @@ export default function (state = initialState, { type, payload }) {
       };
 
     case UPDATE_TASK:
+      const tasks = state.tasks.map(stTask => stTask._id === payload._id ? payload : stTask);
       return {
         ...state,
-        tasks: payload,
+        tasks: tasks,
       };
 
     case SET_TASKS:

@@ -42,17 +42,17 @@ function Dashboard() {
     <Grid doubling={true} container
       verticalAlign="middle"
       justify="center"
-      style={{ minHeight: "500px" }}>
+      style={{ minHeight: "330px" }}>
       <Grid.Row>
-        <Grid.Column widescreen={5} stretched={true} mobile={16}>
+        <Grid.Column largeScreen={5} stretched={true} mobile={16}>
           <TasksCompleted />
         </Grid.Column>
 
-        <Grid.Column widescreen={5} stretched={true} mobile={16}>
+        <Grid.Column largeScreen={5} stretched={true} mobile={16}>
           <LatestTasks />
         </Grid.Column>
 
-        <Grid.Column widescreen={5} stretched={true} mobile={16}>
+        <Grid.Column largeScreen={5} stretched={true} mobile={16}>
           <TasksChart />
         </Grid.Column>
       </Grid.Row>
